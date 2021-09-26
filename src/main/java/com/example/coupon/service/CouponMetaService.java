@@ -33,6 +33,10 @@ public class CouponMetaService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "duplicate code: " + meta.getCode());
         }
 
+        if (meta.getExpiredAt() == null && meta.getDuration() == 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "expiredAt or duration must set");
+        }
+
         meta.setCreatedAt(LocalDateTime.now());
         meta.setUpdatedAt(LocalDateTime.now());
         return couponMetaRepository.save(meta);
@@ -46,6 +50,10 @@ public class CouponMetaService {
         Optional<CouponMeta> old = findByCode(code);
         if (old.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "not exist code: " + code);
+        }
+
+        if (meta.getExpiredAt() == null && meta.getDuration() == 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "expiredAt or duration must set");
         }
 
         CouponMeta oldObj = old.get();

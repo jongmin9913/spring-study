@@ -1,36 +1,30 @@
 package com.example.coupon.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "coupon_meta")
+@Table(name = "user")
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class CouponMeta {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "code", nullable = false, unique = true)
-    private String code;
-
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "expired_at", nullable = true, length = 100)
-    private LocalDateTime expiredAt;
-
-    @Column(name = "duration")
-    private int duration;
-
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 }
